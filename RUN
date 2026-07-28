@@ -1,0 +1,27 @@
+ConnectDevice()
+
+if !DeviceDetected:
+    Show("Device not detected")
+    Exit
+
+ReadDeviceInfo()
+
+Display(
+    Model,
+    Chipset,
+    AndroidVersion,
+    SecurityPatch,
+    BuildNumber
+)
+
+CheckFirmwareCompatibility()
+
+if Compatible == false:
+    Warn("Firmware does not match this device")
+    Exit
+
+StartFlash()
+MonitorLogs()
+
+if LogContains("Anti-Crack"):
+    Show("Possible Anti-Crack protection triggered.")
