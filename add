@@ -1,0 +1,28 @@
+from pathlib import Path
+
+ERRORS = {
+    "anti-crack": "Possible Anti-Crack protection detected",
+    "security": "Security verification failed",
+    "auth": "Authentication required",
+    "sla": "SLA Authentication required",
+    "brom": "BootROM communication error",
+    "da": "Download Agent error",
+}
+
+def analyze_log(file_path):
+    text = Path(file_path).read_text(errors="ignore").lower()
+
+    found = []
+
+    for key, message in ERRORS.items():
+        if key in text:
+            found.append(message)
+
+    if not found:
+        print("No known security errors found.")
+    else:
+        print("Detected:")
+        for item in found:
+            print("-", item)
+
+analyze_log("flash_log.txt")
