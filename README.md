@@ -1,4 +1,3 @@
-# AntiCarck-sec
 import hashlib
 
 def sha256_file(path):
@@ -14,8 +13,8 @@ def sha256_file(path):
     return h.hexdigest()
 
 
-original = "HASH"
-current = sha256_file("A.exe")
+original = "YOUR_ORIGINAL_HASH"
+current = sha256_file("mytool.exe")
 
 if current != original:
     print("File modified!")
