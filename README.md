@@ -6,7 +6,7 @@ def sha256_file(path):
     with open(path, "rb") as f:
         while True:
             data = f.read(1024 * 1024)
-            if not data:
+            if not data: 
                 break
             h.update(data)
 
