@@ -1,23 +1,14 @@
-import hashlib
+from datetime import datetime
 
-def sha256_file(path):
-    h = hashlib.sha256()
+def is_expired(expire_date):
+    expire = datetime.strptime(
+        expire_date,
+        "%Y-%m-%d"
+    )
 
-    with open(path, "rb") as f:
-        while True:
-            data = f.read(1024 * 1024)
-            if not data:
-                break
-            h.update(data)
-
-    return h.hexdigest()
+    return datetime.now() > expire
 
 
-original = "YOUR_ORIGINAL_HASH"
-current = sha256_file("mytool.exe")
-
-if current != original:
-    print("File modified!")
+if is_expired("2026-12-31"):
+    print("License Expired")
     raise SystemExit
-
-print("File OK")
