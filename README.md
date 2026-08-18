@@ -1,14 +1,19 @@
-from datetime import datetime
+def parse_license(data):
+    parts = data.split("|")
 
-def is_expired(expire_date):
-    expire = datetime.strptime(
-        expire_date,
-        "%Y-%m-%d"
-    )
+    if len(parts) != 5:
+        return None
 
-    return datetime.now() > expire
+    user = parts[0]
+    hwid = parts[1]
+    expire = parts[2]
+    edition = parts[3]
+    signature = parts[4]
 
-
-if is_expired("2026-12-31"):
-    print("License Expired")
-    raise SystemExit
+    return {
+        "user": user,
+        "hwid": hwid,
+        "expire": expire,
+        "edition": edition,
+        "signature": signature
+    }
